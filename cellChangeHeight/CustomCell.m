@@ -20,6 +20,7 @@
     
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         
+        self.contentView.autoresizingMask = UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleWidth;
         [self setUpSubView];
     }
     return self;
@@ -29,7 +30,7 @@
 - (void)setUpSubView{
     
     UILabel *titleLabel = [[UILabel alloc] init];
-    titleLabel.numberOfLines = 0;
+    
     [self.contentView addSubview:titleLabel];
     
     UIButton *btn = [[UIButton alloc] init];
@@ -43,10 +44,17 @@
     
     self.titleLabel = titleLabel;
     
+    self.titleLabel.numberOfLines = 2;
+    [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
+        
+        make.top.left.right.equalTo(self.contentView);
+        make.height.equalTo(@44);
+    }];
+    
     [self.btn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.titleLabel.mas_bottom);
         make.right.bottom.equalTo(self.contentView).offset(-10);
-        make.height.equalTo(@20);
+        
     }];
     
 }
@@ -71,7 +79,7 @@
 - (void)zhankai{
     
     
-    
+    self.titleLabel.numberOfLines = 0;
 
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         
@@ -88,7 +96,7 @@
 - (void)shouqi{
     
     
-    
+    self.titleLabel.numberOfLines = 2;
     [self.titleLabel mas_remakeConstraints:^(MASConstraintMaker *make) {
         
         make.top.left.right.equalTo(self.contentView);
